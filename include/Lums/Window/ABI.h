@@ -1,0 +1,12 @@
+#ifndef LUMS_INCLUDED_WINDOW_ABI_H
+#define LUMS_INCLUDED_WINDOW_ABI_H
+
+#include <Lums/Util/Common.h>
+
+#if defined(LUMS_BUILD_WINDOW)
+# define LUMS_API_WINDOW LUMS_DLLEXPORT
+#else
+# define LUMS_API_WINDOW LUMS_DLLIMPORT
+#endif
+
+#endif /* LUMS_INCLUDED_WINDOW_ABI_H */

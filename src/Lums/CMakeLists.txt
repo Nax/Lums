@@ -12,9 +12,28 @@ function (lums_module dir)
 
   set(target "Lums${dir}")
   string(TOUPPER "${dir}" var)
+
   file(GLOB_RECURSE sources "${dir}/*.cpp")
+  file(GLOB_RECURSE sources_win32 "${dir}/Win32/*.cpp")
+  file(GLOB_RECURSE sources_macos "${dir}/MacOS/*.cpp" "${dir}/MacOS/*.m" "${dir}/MacOS/*.mm")
+  file(GLOB_RECURSE sources_linux "${dir}/Linux/*.cpp")
+  file(GLOB_RECURSE sources_unix "${dir}/Unix/*.cpp")
+
+  list(REMOVE_ITEM sources ${sources_win32} ${sources_macos} ${sources_linux} ${sources_unix})
+  if (WIN32)
+    list(APPEND sources ${sources_win32})
+  elseif(APPLE)
+    list(APPEND sources ${sources_macos} ${sources_unix})
+  elseif(UNIX AND NOT APPLE)
+    list(APPEND sources ${sources_linux} ${sources_unix})
+  endif()
+
   add_library(${target} SHARED ${sources})
   target_compile_definitions("${target}" PRIVATE "LUMS_BUILD_${var}=1")
+  if (WIN32)
+    target_compile_definitions("${target}" PRIVATE WIN32_LEAN_AND_MEAN=1 VC_EXTRALEAN=1)
+  endif()
 endfunction()
 
 lums_module(IO)
+lums_module(Window)
