@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['noncopyable_10',['NonCopyable',['../classlm_1_1_non_copyable.html',1,'lm']]]
+  ['_5fgpu_5fdevice_28',['_GPU_DEVICE',['../struct___g_p_u___d_e_v_i_c_e.html',1,'']]]
 ];

@@ -1,7 +1,7 @@
 var indexSectionsWithContent =
 {
-  0: "nsvw",
-  1: "nsvw"
+  0: "_dgnsvw",
+  1: "_dgnsvw"
 };
 
 var indexSectionNames =
