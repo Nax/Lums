@@ -5,6 +5,10 @@
 #include <Lums/Math/Vector.h>
 #include <Lums/Util/NonCopyable.h>
 
+#if defined(LUMS_OS_WINDOWS)
+# include <windows.h>
+#endif
+
 namespace lm
 {
 
@@ -20,14 +24,19 @@ public:
 
     Vector2i size() const;
 
+#if defined(LUMS_OS_WINDOWS)
+    HWND    hwnd() const;
+    HDC     dc() const;
+#endif
+
     void show();
     void hide();
     bool poll();
 
 private:
 #if defined(LUMS_OS_WINDOWS)
-    void*       _win;
-    void*       _dc;
+    HWND    _win;
+    HDC     _dc;
 #endif
 };
 

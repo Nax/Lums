@@ -1,4 +1,7 @@
+find_package(OpenGL REQUIRED)
+
 function (lums_module dir)
+  cmake_parse_arguments(LUMS_MODULE "" "" "LINK" ${ARGN})
   if (NOT MSVC)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -fomit-frame-pointer -fstrict-aliasing")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fomit-frame-pointer -fstrict-aliasing -fno-exceptions -fno-rtti")
@@ -33,7 +36,13 @@ function (lums_module dir)
   if (WIN32)
     target_compile_definitions("${target}" PRIVATE WIN32_LEAN_AND_MEAN=1 VC_EXTRALEAN=1 UNICODE=1)
   endif()
+
+  if (NOT "${LUMS_MODULE_LINK}" STREQUAL "")
+    target_link_libraries(${target} ${LUMS_MODULE_LINK})
+  endif()
 endfunction()
 
 lums_module(IO)
 lums_module(Window)
+lums_module(OpenGL LINK OpenGL::GL)
+lums_module(Draw LINK LumsWindow LumsOpenGL)

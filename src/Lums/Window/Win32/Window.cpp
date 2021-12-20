@@ -1,5 +1,4 @@
 #include <mutex>
-#include <windows.h>
 #include <Lums/Window/Window.h>
 
 using namespace lm;
@@ -73,16 +72,16 @@ Window::Window(const char* title, int width, int height)
     );
 
     /* Get the DC */
-    _dc = GetDC((HWND)_win);
+    _dc = GetDC(_win);
 }
 
 Window::~Window()
 {
     /* Release the DC */
-    ReleaseDC((HWND)_win, (HDC)_dc);
+    ReleaseDC(_win, _dc);
 
     /* Destroy the window */
-    DestroyWindow((HWND)_win);
+    DestroyWindow(_win);
 
     {
         std::unique_lock<std::mutex> lock{gWinClassMutex};
@@ -100,14 +99,24 @@ Vector2i Window::size() const
     return Vector2i(r.right - r.left, r.bottom - r.top);
 }
 
+HWND Window::hwnd() const
+{
+    return _win;
+}
+
+HDC Window::dc() const
+{
+    return _dc;
+}
+
 void Window::show()
 {
-    ShowWindow((HWND)_win, SW_SHOW);
+    ShowWindow(_win, SW_SHOW);
 }
 
 void Window::hide()
 {
-    ShowWindow((HWND)_win, SW_HIDE);
+    ShowWindow(_win, SW_HIDE);
 }
 
 bool Window::poll()
@@ -116,7 +125,7 @@ bool Window::poll()
 
     for (;;)
     {
-        if (!PeekMessage(&msg, (HWND)_win, 0, 0, PM_REMOVE))
+        if (!PeekMessage(&msg, _win, 0, 0, PM_REMOVE))
             return false;
         TranslateMessage(&msg);
         DispatchMessage(&msg);
