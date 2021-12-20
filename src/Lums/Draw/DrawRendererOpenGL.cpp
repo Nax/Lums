@@ -59,6 +59,15 @@ bool bootstrapped;
 PFNWGLCHOOSEPIXELFORMATARBPROC      wglChoosePixelFormatARB;
 PFNWGLCREATECONTEXTATTRIBSARBPROC   wglCreateContextAttribsARB;
 
+/* Framebuffer */
+PFNGLGENFRAMEBUFFERSPROC    glGenFramebuffers;
+PFNGLBINDFRAMEBUFFERPROC    glBindFramebuffer;
+PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers;
+PFNGLFRAMEBUFFERTEXTUREPROC glFramebufferTexture;
+PFNGLDRAWBUFFERSPROC        glDrawBuffers;
+
+#define LOAD_GL(x)  do { (*((void**)(&x))) = getOpenGLProcAddr(#x); } while (0)
+
 void boostrapOpenGL()
 {
     ATOM    fakeClass;
@@ -110,8 +119,8 @@ void boostrapOpenGL()
     wglMakeCurrent(fakeDC, fakeContext);
 
     /* Get the WGL extensions */
-    wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC)getOpenGLProcAddr("wglChoosePixelFormatARB");
-    wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)getOpenGLProcAddr("wglCreateContextAttribsARB");
+    LOAD_GL(wglChoosePixelFormatARB);
+    LOAD_GL(wglCreateContextAttribsARB);
 
     /* Destroy the fake context */
     wglMakeCurrent(fakeDC, nullptr);
@@ -127,6 +136,36 @@ void boostrapOpenGL()
     UnregisterClass((LPCTSTR)fakeClass, (HINSTANCE)&__ImageBase);
 
     bootstrapped = true;
+}
+
+GLenum texType2gl(DrawTextureType t)
+{
+    switch (t)
+    {
+    case DrawTextureType::Texture2D:
+        return GL_TEXTURE_2D;
+    }
+    return 0;
+}
+
+GLenum texFormat2gl(DrawTextureFormat t)
+{
+    switch (t)
+    {
+    case DrawTextureFormat::RGBA:
+        return GL_RGBA;
+    }
+    return 0;
+}
+
+GLint texFormat2glInternal(DrawTextureFormat t)
+{
+    switch (t)
+    {
+    case DrawTextureFormat::RGBA:
+        return GL_RGBA8;
+    }
+    return 0;
 }
 
 }
@@ -154,10 +193,19 @@ DrawRendererOpenGL::DrawRendererOpenGL(Window& win)
     std::printf("OpenGL version: %s\n", glGetString(GL_VERSION));
     std::printf("OpenGL vendor : %s\n", glGetString(GL_VENDOR));
 
+    /* Load the required GL funcs */
+    LOAD_GL(glGenFramebuffers);
+    LOAD_GL(glBindFramebuffer);
+    LOAD_GL(glDeleteFramebuffers);
+    LOAD_GL(glFramebufferTexture);
+    LOAD_GL(glDrawBuffers);
+
     /* Register handlers */
 #define HANDLER(member)                 ([](void* r, const priv::DrawCommand* cmd) { ((DrawRendererOpenGL*)r)->member(cmd); })
 #define REGISTER_HANDLER(cmd, member)   _handlers[(int)priv::DrawCommandType::cmd] = HANDLER(member)
 
+    REGISTER_HANDLER(CreateTexture, implCreateTexture);
+    REGISTER_HANDLER(DestroyTexture, implDestroyTexture);
     REGISTER_HANDLER(CreateFramebuffer, implCreateFramebuffer);
     REGISTER_HANDLER(DestroyFramebuffer, implDestroyFramebuffer);
 
@@ -184,12 +232,78 @@ void DrawRendererOpenGL::swap()
     SwapBuffers(_window.dc());
 }
 
+void DrawRendererOpenGL::implCreateTexture(const priv::DrawCommand* cmd)
+{
+    auto i = cmd->texture.texture.value();
+    auto target = texType2gl(cmd->texture.type);
+    auto format = texFormat2gl(cmd->texture.format);
+    auto internalFormat = texFormat2glInternal(cmd->texture.format);
+
+    GLuint tex;
+    if (_textures.size() < i)
+        _textures.resize(i);
+    glGenTextures(1, &tex);
+    glBindTexture(target, tex);
+
+    switch (target)
+    {
+    case GL_TEXTURE_2D:
+        glTexImage2D(target, 0, internalFormat, cmd->texture.width, cmd->texture.height, 0, format, GL_UNSIGNED_BYTE, cmd->texture.data);
+        break;
+    }
+
+    std::free(cmd->texture.data);
+
+    glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    _textures[i] = tex;
+}
+
+void DrawRendererOpenGL::implDestroyTexture(const priv::DrawCommand* cmd)
+{
+    auto i = cmd->texture.texture.value();
+    glDeleteTextures(1, &_textures[i]);
+    _textures[i] = 0;
+}
+
 void DrawRendererOpenGL::implCreateFramebuffer(const priv::DrawCommand* cmd)
 {
+    auto i = cmd->framebuffer.framebuffer.value();
 
+    GLuint fb;
+    GLuint colors[priv::kMaxFramebufferColors] = {0};
+
+    if (_framebuffers.size() < i)
+        _framebuffers.resize(i);
+
+    glGenFramebuffers(1, &fb);
+    glBindFramebuffer(GL_FRAMEBUFFER, fb);
+
+    for (int j = 0; j < priv::kMaxFramebufferColors; ++j)
+    {
+        if (cmd->framebuffer.color[i])
+        {
+            glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + j, _textures[cmd->framebuffer.color[j].value()], 0);
+            colors[i] = GL_COLOR_ATTACHMENT0 + j;
+        }
+    }
+    glDrawBuffers(priv::kMaxFramebufferColors, colors);
+
+    if (cmd->framebuffer.depth)
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, _textures[cmd->framebuffer.depth.value()], 0);
+
+    if (cmd->framebuffer.stencil)
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, _textures[cmd->framebuffer.stencil.value()], 0);
+
+    _framebuffers[i] = fb;
 }
 
 void DrawRendererOpenGL::implDestroyFramebuffer(const priv::DrawCommand* cmd)
 {
+    auto i = cmd->framebuffer.framebuffer.value();
 
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glDeleteFramebuffers(1, _framebuffers.data() + i);
+    _framebuffers[i] = 0;
 }

@@ -23,8 +23,12 @@ namespace priv
 struct DrawCommand;
 using DrawCommandHandler = void(*)(void*, const DrawCommand*);
 
+static const int kMaxFramebufferColors = 4;
+
 enum class DrawCommandType
 {
+    CreateTexture,
+    DestroyTexture,
     CreateFramebuffer,
     DestroyFramebuffer,
 };
@@ -32,6 +36,9 @@ enum class DrawCommandType
 struct DrawCommandFramebuffer
 {
     DrawFramebuffer framebuffer;
+    DrawTexture     color[kMaxFramebufferColors];
+    DrawTexture     depth;
+    DrawTexture     stencil;
 };
 
 struct DrawCommandTexture
@@ -46,13 +53,14 @@ struct DrawCommandTexture
 
 struct DrawCommand
 {
-    DrawCommand() {}
-
     DrawCommandHandler handler;
     union
     {
-        DrawCommandFramebuffer framebuffer;
+        DrawCommandTexture      texture;
+        DrawCommandFramebuffer  framebuffer;
     };
+
+    DrawCommand() {}
 };
 
 }

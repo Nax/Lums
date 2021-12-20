@@ -9,12 +9,12 @@ namespace lm
 
 namespace priv
 {
-    struct DrawFramebufferTag {};
     struct DrawTextureTag {};
+    struct DrawFramebufferTag {};
 }
 
-using DrawFramebuffer = SafeHandle<std::uint16_t, priv::DrawFramebufferTag>;
 using DrawTexture = SafeHandle<std::uint32_t, priv::DrawTextureTag>;
+using DrawFramebuffer = SafeHandle<std::uint16_t, priv::DrawFramebufferTag>;
 
 }
 

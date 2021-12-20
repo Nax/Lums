@@ -19,24 +19,22 @@ public:
 
     LUMS_API_DRAW virtual bool valid() const = 0;
 
-    LUMS_API_DRAW DrawFramebuffer createFramebuffer();
-    LUMS_API_DRAW void            destroyFramebuffer(DrawFramebuffer fb);
+    LUMS_API_DRAW DrawTexture       createTexture(DrawTextureType type, DrawTextureFormat fmt, int width, int height, void* data);
+    LUMS_API_DRAW DrawFramebuffer   createFramebuffer(DrawTexture* colors, int colorNum, DrawTexture depth, DrawTexture stencil);
+
+    LUMS_API_DRAW void  destroyTexture(DrawTexture tex);
+    LUMS_API_DRAW void  destroyFramebuffer(DrawFramebuffer fb);
 
     LUMS_API_DRAW void render();
     LUMS_API_DRAW virtual void swap() = 0;
 
 protected:
-    enum class CommandType
-    {
-        CreateFramebuffer,
-        DestroyFramebuffer,
-    };
-
     Window& _window;
 
     priv::DrawCommandHandler        _handlers[32];
     std::vector<priv::DrawCommand>  _commands;
 
+    SafeHandleAllocator<DrawTexture>        _allocTexture;
     SafeHandleAllocator<DrawFramebuffer>    _allocFramebuffer;
 };
 
