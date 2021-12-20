@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classlm_1_1_draw_renderer-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -93,9 +92,15 @@ LUMS_API_DRAW&#160;</td><td class="memItemRight" valign="bottom"><b>DrawRenderer
 <tr class="memitem:aff3af2fc5e851d9b07edaa58c0177e10"><td class="memItemLeft" align="right" valign="top"><a id="aff3af2fc5e851d9b07edaa58c0177e10"></a>
 virtual LUMS_API_DRAW bool&#160;</td><td class="memItemRight" valign="bottom"><b>valid</b> () const =0</td></tr>
 <tr class="separator:aff3af2fc5e851d9b07edaa58c0177e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f23f0f7d066adfbb75d0f32bc42ce1a"><td class="memItemLeft" align="right" valign="top"><a id="a4f23f0f7d066adfbb75d0f32bc42ce1a"></a>
-LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createFramebuffer</b> ()</td></tr>
-<tr class="separator:a4f23f0f7d066adfbb75d0f32bc42ce1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c598bb395c0bcb22b47b4b354c8a3eb"><td class="memItemLeft" align="right" valign="top"><a id="a3c598bb395c0bcb22b47b4b354c8a3eb"></a>
+LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createTexture</b> (DrawTextureType type, DrawTextureFormat fmt, int width, int height, void *data)</td></tr>
+<tr class="separator:a3c598bb395c0bcb22b47b4b354c8a3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c39c6246d62a674a224204075b1e971"><td class="memItemLeft" align="right" valign="top"><a id="a4c39c6246d62a674a224204075b1e971"></a>
+LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createFramebuffer</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> *colors, int colorNum, <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> depth, <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> stencil)</td></tr>
+<tr class="separator:a4c39c6246d62a674a224204075b1e971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63220d0d9703250b21810616db6c0f69"><td class="memItemLeft" align="right" valign="top"><a id="a63220d0d9703250b21810616db6c0f69"></a>
+LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyTexture</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> tex)</td></tr>
+<tr class="separator:a63220d0d9703250b21810616db6c0f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad22b6bdcf0bcf0a919d07e7b8a4ef574"><td class="memItemLeft" align="right" valign="top"><a id="ad22b6bdcf0bcf0a919d07e7b8a4ef574"></a>
 LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyFramebuffer</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb)</td></tr>
 <tr class="separator:ad22b6bdcf0bcf0a919d07e7b8a4ef574"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -105,13 +110,6 @@ LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>render<
 <tr class="memitem:aad1b6117823d751a2407a2d40850b676"><td class="memItemLeft" align="right" valign="top"><a id="aad1b6117823d751a2407a2d40850b676"></a>
 virtual LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>swap</b> ()=0</td></tr>
 <tr class="separator:aad1b6117823d751a2407a2d40850b676"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
-Protected Types</h2></td></tr>
-<tr class="memitem:aa8f43fe535789ad0299e33e4d4c40cbc"><td class="memItemLeft" align="right" valign="top"><a id="aa8f43fe535789ad0299e33e4d4c40cbc"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>CommandType</b> { <b>CreateFramebuffer</b>
-, <b>DestroyFramebuffer</b>
- }</td></tr>
-<tr class="separator:aa8f43fe535789ad0299e33e4d4c40cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -124,6 +122,9 @@ priv::DrawCommandHandler&#160;</td><td class="memItemRight" valign="bottom"><b>_
 <tr class="memitem:af118c9f78f34a510bbac6937a1cff39e"><td class="memItemLeft" align="right" valign="top"><a id="af118c9f78f34a510bbac6937a1cff39e"></a>
 std::vector&lt; <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_commands</b></td></tr>
 <tr class="separator:af118c9f78f34a510bbac6937a1cff39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4acedd94fa6514f4e53e0be4178f33ec"><td class="memItemLeft" align="right" valign="top"><a id="a4acedd94fa6514f4e53e0be4178f33ec"></a>
+<a class="el" href="classlm_1_1_safe_handle_allocator.html">SafeHandleAllocator</a>&lt; <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_allocTexture</b></td></tr>
+<tr class="separator:a4acedd94fa6514f4e53e0be4178f33ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7afa5e39a26e998336a668f5683c910"><td class="memItemLeft" align="right" valign="top"><a id="aa7afa5e39a26e998336a668f5683c910"></a>
 <a class="el" href="classlm_1_1_safe_handle_allocator.html">SafeHandleAllocator</a>&lt; <a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_allocFramebuffer</b></td></tr>
 <tr class="separator:aa7afa5e39a26e998336a668f5683c910"><td class="memSeparator" colspan="2">&#160;</td></tr>

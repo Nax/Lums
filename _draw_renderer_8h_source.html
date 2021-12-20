@@ -90,34 +90,32 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    LUMS_API_DRAW <span class="keyword">virtual</span> <span class="keywordtype">bool</span> valid() <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    LUMS_API_DRAW <a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> createFramebuffer();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    LUMS_API_DRAW <span class="keywordtype">void</span>            destroyFramebuffer(<a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    LUMS_API_DRAW <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>       createTexture(DrawTextureType type, DrawTextureFormat fmt, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">void</span>* data);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    LUMS_API_DRAW <a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a>   createFramebuffer(<a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>* colors, <span class="keywordtype">int</span> colorNum, <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a> depth, <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a> stencil);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    LUMS_API_DRAW <span class="keywordtype">void</span> render();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    LUMS_API_DRAW <span class="keyword">virtual</span> <span class="keywordtype">void</span> swap() = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    LUMS_API_DRAW <span class="keywordtype">void</span>  destroyTexture(<a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a> tex);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    LUMS_API_DRAW <span class="keywordtype">void</span>  destroyFramebuffer(<a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">enum class</span> CommandType</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        CreateFramebuffer,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        DestroyFramebuffer,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    };</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classlm_1_1_window.html">Window</a>&amp; _window;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    LUMS_API_DRAW <span class="keywordtype">void</span> render();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    LUMS_API_DRAW <span class="keyword">virtual</span> <span class="keywordtype">void</span> swap() = 0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classlm_1_1_window.html">Window</a>&amp; _window;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    priv::DrawCommandHandler        _handlers[32];</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;priv::DrawCommand&gt;  _commands;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    priv::DrawCommandHandler        _handlers[32];</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::vector&lt;priv::DrawCommand&gt;  _commands;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classlm_1_1_safe_handle_allocator.html">SafeHandleAllocator&lt;DrawFramebuffer&gt;</a>    _allocFramebuffer;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classlm_1_1_safe_handle_allocator.html">SafeHandleAllocator&lt;DrawTexture&gt;</a>        _allocTexture;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classlm_1_1_safe_handle_allocator.html">SafeHandleAllocator&lt;DrawFramebuffer&gt;</a>    _allocFramebuffer;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LUMS_INCLUDED_DRAW_DRAW_RENDERER_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LUMS_INCLUDED_DRAW_DRAW_RENDERER_H */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aclasslm_1_1_draw_renderer_html"><div class="ttname"><a href="classlm_1_1_draw_renderer.html">lm::DrawRenderer</a></div><div class="ttdef"><b>Definition:</b> DrawRenderer.h:15</div></div>
 <div class="ttc" id="aclasslm_1_1_non_copyable_html"><div class="ttname"><a href="classlm_1_1_non_copyable.html">lm::NonCopyable</a></div><div class="ttdef"><b>Definition:</b> NonCopyable.h:11</div></div>
 <div class="ttc" id="aclasslm_1_1_safe_handle_allocator_html"><div class="ttname"><a href="classlm_1_1_safe_handle_allocator.html">lm::SafeHandleAllocator</a></div><div class="ttdef"><b>Definition:</b> SafeHandleAllocator.h:12</div></div>
-<div class="ttc" id="aclasslm_1_1_safe_handle_html"><div class="ttname"><a href="classlm_1_1_safe_handle.html">lm::SafeHandle&lt; std::uint16_t, priv::DrawFramebufferTag &gt;</a></div></div>
+<div class="ttc" id="aclasslm_1_1_safe_handle_html"><div class="ttname"><a href="classlm_1_1_safe_handle.html">lm::SafeHandle&lt; std::uint32_t, priv::DrawTextureTag &gt;</a></div></div>
 <div class="ttc" id="aclasslm_1_1_window_html"><div class="ttname"><a href="classlm_1_1_window.html">lm::Window</a></div><div class="ttdef"><b>Definition:</b> Window.h:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
