@@ -31,7 +31,7 @@ function (lums_module dir)
   add_library(${target} SHARED ${sources})
   target_compile_definitions("${target}" PRIVATE "LUMS_BUILD_${var}=1")
   if (WIN32)
-    target_compile_definitions("${target}" PRIVATE WIN32_LEAN_AND_MEAN=1 VC_EXTRALEAN=1)
+    target_compile_definitions("${target}" PRIVATE WIN32_LEAN_AND_MEAN=1 VC_EXTRALEAN=1 UNICODE=1)
   endif()
 endfunction()
 

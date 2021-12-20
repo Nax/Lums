@@ -2,6 +2,7 @@
 #define LUMS_INCLUDED_WINDOW_WINDOW_H
 
 #include <Lums/Window/ABI.h>
+#include <Lums/Math/Vector.h>
 #include <Lums/Util/NonCopyable.h>
 
 namespace lm
@@ -14,15 +15,19 @@ namespace lm
 class LUMS_API_WINDOW Window : private NonCopyable
 {
 public:
-    Window();
-    virtual ~Window();
+    Window(const char* title, int width, int height);
+    ~Window();
 
-    virtual void swap() = 0;
+    Vector2i size() const;
 
-protected:
+    void show();
+    void hide();
+    bool poll();
+
+private:
 #if defined(LUMS_OS_WINDOWS)
-    void*   _win;
-    void*   _dc;
+    void*       _win;
+    void*       _dc;
 #endif
 };
 
