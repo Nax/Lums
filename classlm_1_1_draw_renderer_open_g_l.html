@@ -94,6 +94,12 @@ LUMS_API_DRAW bool&#160;</td><td class="memItemRight" valign="bottom"><b>valid</
 <tr class="memitem:a508a7ba6e1e0fcf592cd24ac9f3bb16b"><td class="memItemLeft" align="right" valign="top"><a id="a508a7ba6e1e0fcf592cd24ac9f3bb16b"></a>
 LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>swap</b> () override</td></tr>
 <tr class="separator:a508a7ba6e1e0fcf592cd24ac9f3bb16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0963a4bb90cf796dd62be2551a16e2f"><td class="memItemLeft" align="right" valign="top"><a id="ab0963a4bb90cf796dd62be2551a16e2f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>implCreateShader</b> (const <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> *cmd)</td></tr>
+<tr class="separator:ab0963a4bb90cf796dd62be2551a16e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe0420f873337bb9cac313403dd2d9c8"><td class="memItemLeft" align="right" valign="top"><a id="afe0420f873337bb9cac313403dd2d9c8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>implDestroyShader</b> (const <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> *cmd)</td></tr>
+<tr class="separator:afe0420f873337bb9cac313403dd2d9c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a445b1626de352d3f80ae480a424267f1"><td class="memItemLeft" align="right" valign="top"><a id="a445b1626de352d3f80ae480a424267f1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>implCreateTexture</b> (const <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> *cmd)</td></tr>
 <tr class="separator:a445b1626de352d3f80ae480a424267f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,12 +116,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>implDestroyFramebuffe
 <tr class="memitem:af591c75c71bf81915a0746027db97695 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="af591c75c71bf81915a0746027db97695"></a>
 LUMS_API_DRAW&#160;</td><td class="memItemRight" valign="bottom"><b>DrawRenderer</b> (<a class="el" href="classlm_1_1_window.html">Window</a> &amp;window)</td></tr>
 <tr class="separator:af591c75c71bf81915a0746027db97695 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9557520023505f7a82a64bdeedffba76 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a9557520023505f7a82a64bdeedffba76"></a>
+LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawShader</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createShader</b> (const char *vertexSrc, const char *fragmentSrc)</td></tr>
+<tr class="separator:a9557520023505f7a82a64bdeedffba76 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c598bb395c0bcb22b47b4b354c8a3eb inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a3c598bb395c0bcb22b47b4b354c8a3eb"></a>
 LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createTexture</b> (DrawTextureType type, DrawTextureFormat fmt, int width, int height, void *data)</td></tr>
 <tr class="separator:a3c598bb395c0bcb22b47b4b354c8a3eb inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c39c6246d62a674a224204075b1e971 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a4c39c6246d62a674a224204075b1e971"></a>
 LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createFramebuffer</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> *colors, int colorNum, <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> depth, <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> stencil)</td></tr>
 <tr class="separator:a4c39c6246d62a674a224204075b1e971 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4532d817d68b6938d5b6a2f554b609c6 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a4532d817d68b6938d5b6a2f554b609c6"></a>
+LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyShader</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawShader</a> shader)</td></tr>
+<tr class="separator:a4532d817d68b6938d5b6a2f554b609c6 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63220d0d9703250b21810616db6c0f69 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a63220d0d9703250b21810616db6c0f69"></a>
 LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyTexture</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> tex)</td></tr>
 <tr class="separator:a63220d0d9703250b21810616db6c0f69 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,6 +150,9 @@ priv::DrawCommandHandler&#160;</td><td class="memItemRight" valign="bottom"><b>_
 <tr class="memitem:af118c9f78f34a510bbac6937a1cff39e inherit pro_attribs_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="af118c9f78f34a510bbac6937a1cff39e"></a>
 std::vector&lt; <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_commands</b></td></tr>
 <tr class="separator:af118c9f78f34a510bbac6937a1cff39e inherit pro_attribs_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdff4c70af597dbe590e0689abc472bd inherit pro_attribs_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="afdff4c70af597dbe590e0689abc472bd"></a>
+<a class="el" href="classlm_1_1_safe_handle_allocator.html">SafeHandleAllocator</a>&lt; <a class="el" href="classlm_1_1_safe_handle.html">DrawShader</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_allocShader</b></td></tr>
+<tr class="separator:afdff4c70af597dbe590e0689abc472bd inherit pro_attribs_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4acedd94fa6514f4e53e0be4178f33ec inherit pro_attribs_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a4acedd94fa6514f4e53e0be4178f33ec"></a>
 <a class="el" href="classlm_1_1_safe_handle_allocator.html">SafeHandleAllocator</a>&lt; <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_allocTexture</b></td></tr>
 <tr class="separator:a4acedd94fa6514f4e53e0be4178f33ec inherit pro_attribs_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>

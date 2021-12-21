@@ -80,19 +80,22 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>priv</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_texture_tag.html">   12</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_texture_tag.html">DrawTextureTag</a> {};</div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_framebuffer_tag.html">   13</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_framebuffer_tag.html">DrawFramebufferTag</a> {};</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using</span> <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a> = <a class="code" href="classlm_1_1_safe_handle.html">SafeHandle&lt;std::uint32_t, priv::DrawTextureTag&gt;</a>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">using</span> <a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> = <a class="code" href="classlm_1_1_safe_handle.html">SafeHandle&lt;std::uint16_t, priv::DrawFramebufferTag&gt;</a>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_shader_tag.html">   12</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_shader_tag.html">DrawShaderTag</a> {};</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_texture_tag.html">   13</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_texture_tag.html">DrawTextureTag</a> {};</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_framebuffer_tag.html">   14</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_framebuffer_tag.html">DrawFramebufferTag</a> {};</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">using</span> <a class="code" href="classlm_1_1_safe_handle.html">DrawShader</a> = <a class="code" href="classlm_1_1_safe_handle.html">SafeHandle&lt;std::uint16_t, priv::DrawShaderTag&gt;</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">using</span> <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a> = <a class="code" href="classlm_1_1_safe_handle.html">SafeHandle&lt;std::uint32_t, priv::DrawTextureTag&gt;</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using</span> <a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> = <a class="code" href="classlm_1_1_safe_handle.html">SafeHandle&lt;std::uint16_t, priv::DrawFramebufferTag&gt;</a>;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LUMS_INCLUDED_DRAW_TYPES_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclasslm_1_1_safe_handle_html"><div class="ttname"><a href="classlm_1_1_safe_handle.html">lm::SafeHandle&lt; std::uint32_t, priv::DrawTextureTag &gt;</a></div></div>
-<div class="ttc" id="astructlm_1_1priv_1_1_draw_framebuffer_tag_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_framebuffer_tag.html">lm::priv::DrawFramebufferTag</a></div><div class="ttdef"><b>Definition:</b> Types.h:13</div></div>
-<div class="ttc" id="astructlm_1_1priv_1_1_draw_texture_tag_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_texture_tag.html">lm::priv::DrawTextureTag</a></div><div class="ttdef"><b>Definition:</b> Types.h:12</div></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LUMS_INCLUDED_DRAW_TYPES_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasslm_1_1_safe_handle_html"><div class="ttname"><a href="classlm_1_1_safe_handle.html">lm::SafeHandle&lt; std::uint16_t, priv::DrawShaderTag &gt;</a></div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_framebuffer_tag_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_framebuffer_tag.html">lm::priv::DrawFramebufferTag</a></div><div class="ttdef"><b>Definition:</b> Types.h:14</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_shader_tag_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_shader_tag.html">lm::priv::DrawShaderTag</a></div><div class="ttdef"><b>Definition:</b> Types.h:12</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_texture_tag_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_texture_tag.html">lm::priv::DrawTextureTag</a></div><div class="ttdef"><b>Definition:</b> Types.h:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
