@@ -1,11 +1,14 @@
 #ifndef LUMS_INCLUDED_DRAW_COMMAND_H
 #define LUMS_INCLUDED_DRAW_COMMAND_H
 
+#include <Lums/Math/Vector.h>
 #include <Lums/Draw/Types.h>
 #include <Lums/Draw/ABI.h>
 
 namespace lm
 {
+
+class DrawList;
 
 enum class DrawTextureType
 {
@@ -16,6 +19,18 @@ enum class DrawTextureFormat
 {
     RGBA,
 };
+
+namespace DrawClearMask
+{
+
+enum
+{
+    Color = 0x01,
+    Depth = 0x02,
+    Stencil = 0x04,
+};
+
+}
 
 namespace priv
 {
@@ -33,6 +48,8 @@ enum class DrawCommandType
     DestroyTexture,
     CreateFramebuffer,
     DestroyFramebuffer,
+    Clear,
+    Draw,
 };
 
 struct DrawCommandShader
@@ -60,6 +77,20 @@ struct DrawCommandFramebuffer
     DrawTexture     stencil;
 };
 
+struct DrawCommandClear
+{
+    DrawFramebuffer     framebuffer;
+    int                 flags;
+    Vector4f            color;
+    float               depth;
+    int                 stencil;
+};
+
+struct DrawCommandDraw
+{
+    const DrawList* list;
+};
+
 struct DrawCommand
 {
     DrawCommandHandler handler;
@@ -68,6 +99,8 @@ struct DrawCommand
         DrawCommandShader       shader;
         DrawCommandTexture      texture;
         DrawCommandFramebuffer  framebuffer;
+        DrawCommandClear        clear;
+        DrawCommandDraw         draw;
     };
 
     DrawCommand() {}

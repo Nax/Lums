@@ -13,6 +13,8 @@ int main(int argc, char** argv)
     for (;;)
     {
         win.poll();
+        gl.clear(lm::DrawFramebuffer(), lm::DrawClearMask::Color, lm::Vector4f(1.f, 0.f, 0.f, 1.f), 1.f, 0);
+        gl.render();
     }
 
     return 0;

@@ -123,6 +123,26 @@ void DrawRenderer::destroyFramebuffer(DrawFramebuffer fb)
     _commands.push_back(cmd);
 }
 
+void DrawRenderer::clear(DrawFramebuffer fb, int flags, Vector4f color, float depth, int stencil)
+{
+    priv::DrawCommand cmd;
+    cmd.handler = _handlers[(int)priv::DrawCommandType::Clear];
+    cmd.clear.framebuffer = fb;
+    cmd.clear.flags = flags;
+    cmd.clear.color = color;
+    cmd.clear.depth = depth;
+    cmd.clear.stencil = stencil;
+    _commands.push_back(cmd);
+}
+
+void DrawRenderer::draw(const DrawList& list)
+{
+    priv::DrawCommand cmd;
+    cmd.handler = _handlers[(int)priv::DrawCommandType::Draw];
+    cmd.draw.list = &list;
+    _commands.push_back(cmd);
+}
+
 void DrawRenderer::render()
 {
     /* Run the commands */

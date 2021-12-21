@@ -80,7 +80,7 @@ namespace priv
             static_assert(Count < N, "Extra elements in vector");
 
             dst[Count] = T(value);
-            ::priv::VectorBuilder<T, N, Count + 1>::build(dst, args...);
+            ::lm::priv::VectorBuilder<T, N, Count + 1>::build(dst, args...);
         }
     };
 
@@ -136,11 +136,6 @@ public:
         for (size_t i = 0; i < N; ++i)
             this->_data[i] = rhs._data[i];
         return *this;
-    }
-
-    ~Vector()
-    {
-
     }
 
     const T* data() const

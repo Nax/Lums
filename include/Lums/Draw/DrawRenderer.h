@@ -6,6 +6,7 @@
 #include <Lums/Draw/ABI.h>
 #include <Lums/Draw/DrawCommand.h>
 #include <Lums/Draw/Types.h>
+#include <Lums/Math/Vector.h>
 
 namespace lm
 {
@@ -27,10 +28,14 @@ public:
     LUMS_API_DRAW void  destroyTexture(DrawTexture tex);
     LUMS_API_DRAW void  destroyFramebuffer(DrawFramebuffer fb);
 
+    LUMS_API_DRAW void  clear(DrawFramebuffer fb, int flags, Vector4f color, float depth, int stencil);
+    LUMS_API_DRAW void  draw(const DrawList& list);
+
     LUMS_API_DRAW void render();
-    LUMS_API_DRAW virtual void swap() = 0;
 
 protected:
+    LUMS_API_DRAW virtual void swap() = 0;
+
     Window& _window;
 
     priv::DrawCommandHandler        _handlers[32];

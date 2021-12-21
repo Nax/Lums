@@ -15,7 +15,7 @@ namespace priv
 }
 
 using DrawShader = SafeHandle<std::uint16_t, priv::DrawShaderTag>;
-using DrawTexture = SafeHandle<std::uint32_t, priv::DrawTextureTag>;
+using DrawTexture = SafeHandle<std::uint16_t, priv::DrawTextureTag>;
 using DrawFramebuffer = SafeHandle<std::uint16_t, priv::DrawFramebufferTag>;
 
 }

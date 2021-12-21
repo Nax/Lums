@@ -265,9 +265,20 @@ DrawRendererOpenGL::DrawRendererOpenGL(Window& win)
     REGISTER_HANDLER(DestroyTexture, implDestroyTexture);
     REGISTER_HANDLER(CreateFramebuffer, implCreateFramebuffer);
     REGISTER_HANDLER(DestroyFramebuffer, implDestroyFramebuffer);
+    REGISTER_HANDLER(Clear, implClear);
+    REGISTER_HANDLER(Draw, implDraw);
 
 #undef REGISTER_HANDLER
 #undef HANDLER
+
+    /* Default state */
+    _clearColor = Vector4f(0.f, 0.f, 0.f, 1.f);
+    _clearDepth = 1.f;
+    _clearStencil = 0;
+
+    glClearColor(_clearColor.x, _clearColor.y, _clearColor.z, _clearColor.w);
+    glClearDepth(_clearDepth);
+    glClearStencil(_clearStencil);
 }
 
 DrawRendererOpenGL::~DrawRendererOpenGL()
@@ -411,4 +422,51 @@ void DrawRendererOpenGL::implDestroyFramebuffer(const priv::DrawCommand* cmd)
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glDeleteFramebuffers(1, _framebuffers.data() + i);
     _framebuffers[i] = 0;
+}
+
+void DrawRendererOpenGL::implClear(const priv::DrawCommand* cmd)
+{
+    const auto& clear = cmd->clear;
+    GLbitfield clearBits{};
+
+    /* Color buffer */
+    if (clear.flags & DrawClearMask::Color)
+    {
+        clearBits |= GL_COLOR_BUFFER_BIT;
+        if (_clearColor != clear.color)
+        {
+            _clearColor = clear.color;
+            glClearColor(_clearColor[0], _clearColor[1], _clearColor[2], _clearColor[3]);
+        }
+    }
+
+    /* Depth buffer */
+    if (clear.flags & DrawClearMask::Depth)
+    {
+        clearBits |= GL_DEPTH_BUFFER_BIT;
+        if (_clearDepth != clear.depth)
+        {
+            _clearDepth = clear.depth;
+            glClearDepth(_clearDepth);
+        }
+    }
+
+    /* Stencil buffer */
+    if (clear.flags & DrawClearMask::Stencil)
+    {
+        clearBits |= GL_STENCIL_BUFFER_BIT;
+        if (_clearStencil != clear.stencil)
+        {
+            _clearStencil = clear.stencil;
+            glClearStencil(_clearStencil);
+        }
+    }
+
+    if (clearBits)
+        glClear(clearBits);
+}
+
+void DrawRendererOpenGL::implDraw(const priv::DrawCommand* cmd)
+{
+    /* TODO: Actually draw anything */
 }

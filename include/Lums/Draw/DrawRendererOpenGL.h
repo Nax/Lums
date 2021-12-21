@@ -14,7 +14,6 @@ public:
     LUMS_API_DRAW ~DrawRendererOpenGL();
 
     LUMS_API_DRAW bool valid() const override;
-    LUMS_API_DRAW void swap() override;
 
     void implCreateShader(const priv::DrawCommand* cmd);
     void implDestroyShader(const priv::DrawCommand* cmd);
@@ -22,6 +21,11 @@ public:
     void implDestroyTexture(const priv::DrawCommand* cmd);
     void implCreateFramebuffer(const priv::DrawCommand* cmd);
     void implDestroyFramebuffer(const priv::DrawCommand* cmd);
+    void implClear(const priv::DrawCommand* cmd);
+    void implDraw(const priv::DrawCommand* cmd);
+
+protected:
+    LUMS_API_DRAW void swap() override;
 
 private:
     HGLRC _context;
@@ -29,6 +33,10 @@ private:
     std::vector<GLuint> _programs;
     std::vector<GLuint> _textures;
     std::vector<GLuint> _framebuffers;
+
+    Vector4f    _clearColor;
+    float       _clearDepth;
+    int         _clearStencil;
 };
 
 }
