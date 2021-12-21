@@ -29,6 +29,28 @@ DrawRenderer::~DrawRenderer()
 
 }
 
+DrawShader DrawRenderer::createShader(const char* vertexSrc, const char* fragmentSrc)
+{
+    DrawShader shader = _allocShader.alloc();
+
+    char* vertexCopy;
+    char* fragmentCopy;
+
+    vertexCopy = (char*)std::calloc(1, std::strlen(vertexSrc) + 1);
+    fragmentCopy = (char*)std::calloc(1, std::strlen(fragmentSrc) + 1);
+    std::strcpy(vertexCopy, vertexSrc);
+    std::strcpy(fragmentCopy, fragmentSrc);
+
+    priv::DrawCommand cmd;
+    cmd.handler = _handlers[(int)priv::DrawCommandType::CreateShader];
+    cmd.shader.shader = shader;
+    cmd.shader.vertexSrc = vertexCopy;
+    cmd.shader.fragmentSrc = fragmentCopy;
+    _commands.push_back(cmd);
+
+    return shader;
+}
+
 DrawTexture DrawRenderer::createTexture(DrawTextureType type, DrawTextureFormat fmt, int width, int height, void* data)
 {
     DrawTexture tex = _allocTexture.alloc();
@@ -69,6 +91,16 @@ DrawFramebuffer DrawRenderer::createFramebuffer(DrawTexture* colors, int colorNu
     _commands.push_back(cmd);
 
     return fb;
+}
+
+void DrawRenderer::destroyShader(DrawShader shader)
+{
+    _allocShader.dealloc(shader);
+
+    priv::DrawCommand cmd;
+    cmd.handler = _handlers[(int)priv::DrawCommandType::DestroyShader];
+    cmd.shader.shader = shader;
+    _commands.push_back(cmd);
 }
 
 void DrawRenderer::destroyTexture(DrawTexture tex)

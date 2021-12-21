@@ -19,9 +19,11 @@ public:
 
     LUMS_API_DRAW virtual bool valid() const = 0;
 
+    LUMS_API_DRAW DrawShader        createShader(const char* vertexSrc, const char* fragmentSrc);
     LUMS_API_DRAW DrawTexture       createTexture(DrawTextureType type, DrawTextureFormat fmt, int width, int height, void* data);
     LUMS_API_DRAW DrawFramebuffer   createFramebuffer(DrawTexture* colors, int colorNum, DrawTexture depth, DrawTexture stencil);
 
+    LUMS_API_DRAW void  destroyShader(DrawShader shader);
     LUMS_API_DRAW void  destroyTexture(DrawTexture tex);
     LUMS_API_DRAW void  destroyFramebuffer(DrawFramebuffer fb);
 
@@ -34,6 +36,7 @@ protected:
     priv::DrawCommandHandler        _handlers[32];
     std::vector<priv::DrawCommand>  _commands;
 
+    SafeHandleAllocator<DrawShader>         _allocShader;
     SafeHandleAllocator<DrawTexture>        _allocTexture;
     SafeHandleAllocator<DrawFramebuffer>    _allocFramebuffer;
 };

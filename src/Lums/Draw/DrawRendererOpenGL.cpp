@@ -56,8 +56,27 @@ const int kContextAttribList[] = {
 
 bool bootstrapped;
 
+/* WGL */
 PFNWGLCHOOSEPIXELFORMATARBPROC      wglChoosePixelFormatARB;
 PFNWGLCREATECONTEXTATTRIBSARBPROC   wglCreateContextAttribsARB;
+
+/* Shader */
+PFNGLCREATESHADERPROC       glCreateShader;
+PFNGLDELETESHADERPROC       glDeleteShader;
+PFNGLSHADERSOURCEPROC       glShaderSource;
+PFNGLCOMPILESHADERPROC      glCompileShader;
+PFNGLGETSHADERIVPROC        glGetShaderiv;
+PFNGLGETSHADERINFOLOGPROC   glGetShaderInfoLog;
+
+/* Program */
+PFNGLCREATEPROGRAMPROC      glCreateProgram;
+PFNGLUSEPROGRAMPROC         glUseProgram;
+PFNGLDELETEPROGRAMPROC      glDeleteProgram;
+PFNGLATTACHSHADERPROC       glAttachShader;
+PFNGLDETACHSHADERPROC       glDetachShader;
+PFNGLLINKPROGRAMPROC        glLinkProgram;
+PFNGLGETPROGRAMIVPROC       glGetProgramiv;
+PFNGLGETPROGRAMINFOLOGPROC  glGetProgramInfoLog;
 
 /* Framebuffer */
 PFNGLGENFRAMEBUFFERSPROC    glGenFramebuffers;
@@ -168,6 +187,28 @@ GLint texFormat2glInternal(DrawTextureFormat t)
     return 0;
 }
 
+GLuint compileShader(const char* src, GLenum type)
+{
+    GLuint shader = glCreateShader(type);
+    GLint length = (GLint)std::strlen(src);
+    glShaderSource(shader, 1, &src, &length);
+    glCompileShader(shader);
+
+    GLint tmp;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &tmp);
+    if (tmp != GL_TRUE)
+    {
+        char* buffer;
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &tmp);
+        buffer = (char*)std::calloc(1, tmp + 1);
+        glGetShaderInfoLog(shader, tmp + 1, nullptr, buffer);
+        std::printf("%s\n", buffer);
+        std::free(buffer);
+    }
+
+    return shader;
+}
+
 }
 
 DrawRendererOpenGL::DrawRendererOpenGL(Window& win)
@@ -194,6 +235,20 @@ DrawRendererOpenGL::DrawRendererOpenGL(Window& win)
     std::printf("OpenGL vendor : %s\n", glGetString(GL_VENDOR));
 
     /* Load the required GL funcs */
+    LOAD_GL(glCreateShader);
+    LOAD_GL(glDeleteShader);
+    LOAD_GL(glShaderSource);
+    LOAD_GL(glCompileShader);
+    LOAD_GL(glGetShaderiv);
+    LOAD_GL(glGetShaderInfoLog);
+    LOAD_GL(glCreateProgram);
+    LOAD_GL(glUseProgram);
+    LOAD_GL(glDeleteProgram);
+    LOAD_GL(glAttachShader);
+    LOAD_GL(glDetachShader);
+    LOAD_GL(glLinkProgram);
+    LOAD_GL(glGetProgramiv);
+    LOAD_GL(glGetProgramInfoLog);
     LOAD_GL(glGenFramebuffers);
     LOAD_GL(glBindFramebuffer);
     LOAD_GL(glDeleteFramebuffers);
@@ -204,6 +259,8 @@ DrawRendererOpenGL::DrawRendererOpenGL(Window& win)
 #define HANDLER(member)                 ([](void* r, const priv::DrawCommand* cmd) { ((DrawRendererOpenGL*)r)->member(cmd); })
 #define REGISTER_HANDLER(cmd, member)   _handlers[(int)priv::DrawCommandType::cmd] = HANDLER(member)
 
+    REGISTER_HANDLER(CreateShader, implCreateShader);
+    REGISTER_HANDLER(DestroyShader, implDestroyShader);
     REGISTER_HANDLER(CreateTexture, implCreateTexture);
     REGISTER_HANDLER(DestroyTexture, implDestroyTexture);
     REGISTER_HANDLER(CreateFramebuffer, implCreateFramebuffer);
@@ -232,6 +289,54 @@ void DrawRendererOpenGL::swap()
     SwapBuffers(_window.dc());
 }
 
+void DrawRendererOpenGL::implCreateShader(const priv::DrawCommand* cmd)
+{
+    GLuint program;
+    GLuint shaderVertex;
+    GLuint shaderFragment;
+
+    shaderVertex = compileShader(cmd->shader.vertexSrc, GL_VERTEX_SHADER);
+    shaderFragment = compileShader(cmd->shader.fragmentSrc, GL_FRAGMENT_SHADER);
+
+    std::free(cmd->shader.vertexSrc);
+    std::free(cmd->shader.fragmentSrc);
+
+    program = glCreateProgram();
+    glAttachShader(program, shaderVertex);
+    glAttachShader(program, shaderFragment);
+    glLinkProgram(program);
+
+    GLint tmp;
+    glGetProgramiv(program, GL_LINK_STATUS, &tmp);
+    if (tmp != GL_TRUE)
+    {
+        char* buffer;
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &tmp);
+        buffer = (char*)std::calloc(1, tmp + 1);
+        glGetProgramInfoLog(program, tmp + 1, nullptr, buffer);
+        std::printf("%s\n", buffer);
+        std::free(buffer);
+    }
+
+    glDetachShader(program, shaderVertex);
+    glDetachShader(program, shaderFragment);
+
+    glDeleteShader(shaderVertex);
+    glDeleteShader(shaderFragment);
+
+    auto i = cmd->shader.shader.value();
+    if (_programs.size() <= i)
+        _programs.resize(i + 1);
+    _programs[i] = program;
+}
+
+void DrawRendererOpenGL::implDestroyShader(const priv::DrawCommand* cmd)
+{
+    auto i = cmd->shader.shader.value();
+    glDeleteProgram(_programs[i]);
+    _programs[i] = 0;
+}
+
 void DrawRendererOpenGL::implCreateTexture(const priv::DrawCommand* cmd)
 {
     auto i = cmd->texture.texture.value();
@@ -240,8 +345,8 @@ void DrawRendererOpenGL::implCreateTexture(const priv::DrawCommand* cmd)
     auto internalFormat = texFormat2glInternal(cmd->texture.format);
 
     GLuint tex;
-    if (_textures.size() < i)
-        _textures.resize(i);
+    if (_textures.size() <= i)
+        _textures.resize(i + 1);
     glGenTextures(1, &tex);
     glBindTexture(target, tex);
 
@@ -274,8 +379,8 @@ void DrawRendererOpenGL::implCreateFramebuffer(const priv::DrawCommand* cmd)
     GLuint fb;
     GLuint colors[priv::kMaxFramebufferColors] = {0};
 
-    if (_framebuffers.size() < i)
-        _framebuffers.resize(i);
+    if (_framebuffers.size() <= i)
+        _framebuffers.resize(i + 1);
 
     glGenFramebuffers(1, &fb);
     glBindFramebuffer(GL_FRAMEBUFFER, fb);

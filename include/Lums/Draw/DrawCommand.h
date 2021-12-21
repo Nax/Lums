@@ -27,18 +27,19 @@ static const int kMaxFramebufferColors = 4;
 
 enum class DrawCommandType
 {
+    CreateShader,
+    DestroyShader,
     CreateTexture,
     DestroyTexture,
     CreateFramebuffer,
     DestroyFramebuffer,
 };
 
-struct DrawCommandFramebuffer
+struct DrawCommandShader
 {
-    DrawFramebuffer framebuffer;
-    DrawTexture     color[kMaxFramebufferColors];
-    DrawTexture     depth;
-    DrawTexture     stencil;
+    DrawShader  shader;
+    char*       vertexSrc;
+    char*       fragmentSrc;
 };
 
 struct DrawCommandTexture
@@ -51,11 +52,20 @@ struct DrawCommandTexture
     void*               data;
 };
 
+struct DrawCommandFramebuffer
+{
+    DrawFramebuffer framebuffer;
+    DrawTexture     color[kMaxFramebufferColors];
+    DrawTexture     depth;
+    DrawTexture     stencil;
+};
+
 struct DrawCommand
 {
     DrawCommandHandler handler;
     union
     {
+        DrawCommandShader       shader;
         DrawCommandTexture      texture;
         DrawCommandFramebuffer  framebuffer;
     };

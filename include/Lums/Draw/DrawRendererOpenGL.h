@@ -16,6 +16,8 @@ public:
     LUMS_API_DRAW bool valid() const override;
     LUMS_API_DRAW void swap() override;
 
+    void implCreateShader(const priv::DrawCommand* cmd);
+    void implDestroyShader(const priv::DrawCommand* cmd);
     void implCreateTexture(const priv::DrawCommand* cmd);
     void implDestroyTexture(const priv::DrawCommand* cmd);
     void implCreateFramebuffer(const priv::DrawCommand* cmd);
@@ -24,6 +26,7 @@ public:
 private:
     HGLRC _context;
 
+    std::vector<GLuint> _programs;
     std::vector<GLuint> _textures;
     std::vector<GLuint> _framebuffers;
 };
