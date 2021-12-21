@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['vector_55',['Vector',['../classlm_1_1_vector.html',1,'lm']]],
-  ['vectorbuilder_56',['VectorBuilder',['../structlm_1_1priv_1_1_vector_builder.html',1,'lm::priv']]],
-  ['vectorstorage_57',['VectorStorage',['../structlm_1_1priv_1_1_vector_storage.html',1,'lm::priv']]],
-  ['vectorstorage_3c_20t_2c_201_20_3e_58',['VectorStorage&lt; T, 1 &gt;',['../structlm_1_1priv_1_1_vector_storage_3_01_t_00_011_01_4.html',1,'lm::priv']]],
-  ['vectorstorage_3c_20t_2c_202_20_3e_59',['VectorStorage&lt; T, 2 &gt;',['../structlm_1_1priv_1_1_vector_storage_3_01_t_00_012_01_4.html',1,'lm::priv']]],
-  ['vectorstorage_3c_20t_2c_203_20_3e_60',['VectorStorage&lt; T, 3 &gt;',['../structlm_1_1priv_1_1_vector_storage_3_01_t_00_013_01_4.html',1,'lm::priv']]]
+  ['safehandle_60',['SafeHandle',['../classlm_1_1_safe_handle.html',1,'lm']]],
+  ['safehandle_3c_20std_3a_3auint16_5ft_2c_20priv_3a_3adrawframebuffertag_20_3e_61',['SafeHandle&lt; std::uint16_t, priv::DrawFramebufferTag &gt;',['../classlm_1_1_safe_handle.html',1,'lm']]],
+  ['safehandle_3c_20std_3a_3auint16_5ft_2c_20priv_3a_3adrawshadertag_20_3e_62',['SafeHandle&lt; std::uint16_t, priv::DrawShaderTag &gt;',['../classlm_1_1_safe_handle.html',1,'lm']]],
+  ['safehandle_3c_20std_3a_3auint16_5ft_2c_20priv_3a_3adrawtexturetag_20_3e_63',['SafeHandle&lt; std::uint16_t, priv::DrawTextureTag &gt;',['../classlm_1_1_safe_handle.html',1,'lm']]],
+  ['safehandleallocator_64',['SafeHandleAllocator',['../classlm_1_1_safe_handle_allocator.html',1,'lm']]],
+  ['safehandleallocator_3c_20lm_3a_3asafehandle_20_3e_65',['SafeHandleAllocator&lt; lm::SafeHandle &gt;',['../classlm_1_1_safe_handle_allocator.html',1,'lm']]],
+  ['stream_66',['Stream',['../classlm_1_1_stream.html',1,'lm']]],
+  ['streambuffer_67',['StreamBuffer',['../classlm_1_1_stream_buffer.html',1,'lm']]]
 ];

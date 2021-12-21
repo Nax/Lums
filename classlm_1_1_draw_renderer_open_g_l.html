@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classlm_1_1_draw_renderer_open_g_l-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">lm::DrawRendererOpenGL Class Reference</div>  </div>
@@ -91,9 +92,6 @@ LUMS_API_DRAW&#160;</td><td class="memItemRight" valign="bottom"><b>DrawRenderer
 <tr class="memitem:af536128ac019233a42017eaccbe57611"><td class="memItemLeft" align="right" valign="top"><a id="af536128ac019233a42017eaccbe57611"></a>
 LUMS_API_DRAW bool&#160;</td><td class="memItemRight" valign="bottom"><b>valid</b> () const override</td></tr>
 <tr class="separator:af536128ac019233a42017eaccbe57611"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a508a7ba6e1e0fcf592cd24ac9f3bb16b"><td class="memItemLeft" align="right" valign="top"><a id="a508a7ba6e1e0fcf592cd24ac9f3bb16b"></a>
-LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>swap</b> () override</td></tr>
-<tr class="separator:a508a7ba6e1e0fcf592cd24ac9f3bb16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0963a4bb90cf796dd62be2551a16e2f"><td class="memItemLeft" align="right" valign="top"><a id="ab0963a4bb90cf796dd62be2551a16e2f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>implCreateShader</b> (const <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> *cmd)</td></tr>
 <tr class="separator:ab0963a4bb90cf796dd62be2551a16e2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,6 +110,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>implCreateFramebuffer
 <tr class="memitem:a7421645b8d745933500dad1137cb9dfc"><td class="memItemLeft" align="right" valign="top"><a id="a7421645b8d745933500dad1137cb9dfc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>implDestroyFramebuffer</b> (const <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> *cmd)</td></tr>
 <tr class="separator:a7421645b8d745933500dad1137cb9dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfded1bbb183e64db429244f5f15f78b"><td class="memItemLeft" align="right" valign="top"><a id="abfded1bbb183e64db429244f5f15f78b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>implClear</b> (const <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> *cmd)</td></tr>
+<tr class="separator:abfded1bbb183e64db429244f5f15f78b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d80996f17f493f8ccfb60becea2dbc"><td class="memItemLeft" align="right" valign="top"><a id="a39d80996f17f493f8ccfb60becea2dbc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>implDraw</b> (const <a class="el" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a> *cmd)</td></tr>
+<tr class="separator:a39d80996f17f493f8ccfb60becea2dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classlm_1_1_draw_renderer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classlm_1_1_draw_renderer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classlm_1_1_draw_renderer.html">lm::DrawRenderer</a></td></tr>
 <tr class="memitem:af591c75c71bf81915a0746027db97695 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="af591c75c71bf81915a0746027db97695"></a>
 LUMS_API_DRAW&#160;</td><td class="memItemRight" valign="bottom"><b>DrawRenderer</b> (<a class="el" href="classlm_1_1_window.html">Window</a> &amp;window)</td></tr>
@@ -134,9 +138,21 @@ LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroy
 <tr class="memitem:ad22b6bdcf0bcf0a919d07e7b8a4ef574 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="ad22b6bdcf0bcf0a919d07e7b8a4ef574"></a>
 LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyFramebuffer</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb)</td></tr>
 <tr class="separator:ad22b6bdcf0bcf0a919d07e7b8a4ef574 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34ff6ff3fdbf413e51c46a154327bed2 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a34ff6ff3fdbf413e51c46a154327bed2"></a>
+LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb, int flags, <a class="el" href="classlm_1_1_vector.html">Vector4f</a> color, float depth, int stencil)</td></tr>
+<tr class="separator:a34ff6ff3fdbf413e51c46a154327bed2 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d576ee35c902c5737526d59e9fba54 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a79d576ee35c902c5737526d59e9fba54"></a>
+LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (const <a class="el" href="classlm_1_1_draw_list.html">DrawList</a> &amp;list)</td></tr>
+<tr class="separator:a79d576ee35c902c5737526d59e9fba54 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31a85cd77bf82514c186ff0b2de01db5 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memItemLeft" align="right" valign="top"><a id="a31a85cd77bf82514c186ff0b2de01db5"></a>
 LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> ()</td></tr>
 <tr class="separator:a31a85cd77bf82514c186ff0b2de01db5 inherit pub_methods_classlm_1_1_draw_renderer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a508a7ba6e1e0fcf592cd24ac9f3bb16b"><td class="memItemLeft" align="right" valign="top"><a id="a508a7ba6e1e0fcf592cd24ac9f3bb16b"></a>
+LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>swap</b> () override</td></tr>
+<tr class="separator:a508a7ba6e1e0fcf592cd24ac9f3bb16b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>

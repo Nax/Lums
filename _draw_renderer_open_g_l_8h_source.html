@@ -85,30 +85,39 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    LUMS_API_DRAW ~<a class="code" href="classlm_1_1_draw_renderer_open_g_l.html">DrawRendererOpenGL</a>();</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    LUMS_API_DRAW <span class="keywordtype">bool</span> valid() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    LUMS_API_DRAW <span class="keywordtype">void</span> swap() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> implCreateShader(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> implDestroyShader(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> implCreateTexture(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> implDestroyTexture(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> implCreateFramebuffer(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> implDestroyFramebuffer(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    HGLRC _context;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    std::vector&lt;GLuint&gt; _programs;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    std::vector&lt;GLuint&gt; _textures;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    std::vector&lt;GLuint&gt; _framebuffers;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LUMS_INCLUDED_DRAW_DRAW_RENDERER_OPENGL_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclasslm_1_1_draw_renderer_html"><div class="ttname"><a href="classlm_1_1_draw_renderer.html">lm::DrawRenderer</a></div><div class="ttdef"><b>Definition:</b> DrawRenderer.h:15</div></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">void</span> implCreateShader(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">void</span> implDestroyShader(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> implCreateTexture(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">void</span> implDestroyTexture(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> implCreateFramebuffer(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">void</span> implDestroyFramebuffer(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> implClear(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> implDraw(<span class="keyword">const</span> <a class="code" href="structlm_1_1priv_1_1_draw_command.html">priv::DrawCommand</a>* cmd);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    LUMS_API_DRAW <span class="keywordtype">void</span> swap() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    HGLRC _context;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::vector&lt;GLuint&gt; _programs;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::vector&lt;GLuint&gt; _textures;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;GLuint&gt; _framebuffers;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classlm_1_1_vector.html">Vector4f</a>    _clearColor;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">float</span>       _clearDepth;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">int</span>         _clearStencil;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LUMS_INCLUDED_DRAW_DRAW_RENDERER_OPENGL_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasslm_1_1_draw_renderer_html"><div class="ttname"><a href="classlm_1_1_draw_renderer.html">lm::DrawRenderer</a></div><div class="ttdef"><b>Definition:</b> DrawRenderer.h:16</div></div>
 <div class="ttc" id="aclasslm_1_1_draw_renderer_open_g_l_html"><div class="ttname"><a href="classlm_1_1_draw_renderer_open_g_l.html">lm::DrawRendererOpenGL</a></div><div class="ttdef"><b>Definition:</b> DrawRendererOpenGL.h:11</div></div>
+<div class="ttc" id="aclasslm_1_1_vector_html"><div class="ttname"><a href="classlm_1_1_vector.html">lm::Vector</a></div><div class="ttdef"><b>Definition:</b> Vector.h:91</div></div>
 <div class="ttc" id="aclasslm_1_1_window_html"><div class="ttname"><a href="classlm_1_1_window.html">lm::Window</a></div><div class="ttdef"><b>Definition:</b> Window.h:20</div></div>
-<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command.html">lm::priv::DrawCommand</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:64</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command.html">lm::priv::DrawCommand</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:95</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

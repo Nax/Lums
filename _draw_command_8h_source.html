@@ -72,88 +72,125 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LUMS_INCLUDED_DRAW_COMMAND_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LUMS_INCLUDED_DRAW_COMMAND_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;Lums/Draw/Types.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;Lums/Draw/ABI.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>lm</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">enum class</span> DrawTextureType</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    Texture2D,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;};</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">enum class</span> DrawTextureFormat</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    RGBA,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;};</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">namespace </span>priv</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;Lums/Math/Vector.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;Lums/Draw/Types.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;Lums/Draw/ABI.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span>lm</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span>DrawList;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">enum class</span> DrawTextureType</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    Texture2D,</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;};</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">enum class</span> DrawTextureFormat</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    RGBA,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">struct </span>DrawCommand;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using</span> DrawCommandHandler = void(*)(<span class="keywordtype">void</span>*, <span class="keyword">const</span> DrawCommand*);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span>DrawClearMask</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> kMaxFramebufferColors = 4;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">enum class</span> DrawCommandType</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    CreateShader,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    DestroyShader,</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    CreateTexture,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    DestroyTexture,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    CreateFramebuffer,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    DestroyFramebuffer,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">enum</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    Color = 0x01,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Depth = 0x02,</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    Stencil = 0x04,</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">namespace </span>priv</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command_shader.html">   38</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command_shader.html">DrawCommandShader</a></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawShader</a>  shader;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">char</span>*       vertexSrc;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">char</span>*       fragmentSrc;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;};</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command_texture.html">   45</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command_texture.html">DrawCommandTexture</a></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>         texture;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    DrawTextureType     type;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    DrawTextureFormat   format;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">int</span>                 width;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">int</span>                 height;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span>*               data;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">struct </span>DrawCommand;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">using</span> DrawCommandHandler = void(*)(<span class="keywordtype">void</span>*, <span class="keyword">const</span> DrawCommand*);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> kMaxFramebufferColors = 4;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">enum class</span> DrawCommandType</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    CreateShader,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    DestroyShader,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    CreateTexture,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    DestroyTexture,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    CreateFramebuffer,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    DestroyFramebuffer,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    Clear,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    Draw,</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command_framebuffer.html">   55</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command_framebuffer.html">DrawCommandFramebuffer</a></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command_shader.html">   55</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command_shader.html">DrawCommandShader</a></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> framebuffer;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>     color[kMaxFramebufferColors];</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>     depth;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>     stencil;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command.html">   63</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command.html">DrawCommand</a></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    DrawCommandHandler handler;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">union</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="structlm_1_1priv_1_1_draw_command_shader.html">DrawCommandShader</a>       shader;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="structlm_1_1priv_1_1_draw_command_texture.html">DrawCommandTexture</a>      texture;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <a class="code" href="structlm_1_1priv_1_1_draw_command_framebuffer.html">DrawCommandFramebuffer</a>  framebuffer;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    };</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="structlm_1_1priv_1_1_draw_command.html">DrawCommand</a>() {}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawShader</a>  shader;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">char</span>*       vertexSrc;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">char</span>*       fragmentSrc;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command_texture.html">   62</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command_texture.html">DrawCommandTexture</a></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>         texture;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    DrawTextureType     type;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    DrawTextureFormat   format;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">int</span>                 width;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">int</span>                 height;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span>*               data;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command_framebuffer.html">   72</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command_framebuffer.html">DrawCommandFramebuffer</a></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> framebuffer;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>     color[kMaxFramebufferColors];</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>     depth;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawTexture</a>     stencil;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LUMS_INCLUDED_DRAW_COMMAND_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command_clear.html">   80</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command_clear.html">DrawCommandClear</a></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a>     framebuffer;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">int</span>                 flags;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="classlm_1_1_vector.html">Vector4f</a>            color;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">float</span>               depth;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">int</span>                 stencil;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command_draw.html">   89</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command_draw.html">DrawCommandDraw</a></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;{</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">const</span> <a class="code" href="classlm_1_1_draw_list.html">DrawList</a>* list;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;};</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="structlm_1_1priv_1_1_draw_command.html">   94</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structlm_1_1priv_1_1_draw_command.html">DrawCommand</a></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    DrawCommandHandler handler;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">union</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <a class="code" href="structlm_1_1priv_1_1_draw_command_shader.html">DrawCommandShader</a>       shader;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <a class="code" href="structlm_1_1priv_1_1_draw_command_texture.html">DrawCommandTexture</a>      texture;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <a class="code" href="structlm_1_1priv_1_1_draw_command_framebuffer.html">DrawCommandFramebuffer</a>  framebuffer;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <a class="code" href="structlm_1_1priv_1_1_draw_command_clear.html">DrawCommandClear</a>        clear;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <a class="code" href="structlm_1_1priv_1_1_draw_command_draw.html">DrawCommandDraw</a>         draw;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    };</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="structlm_1_1priv_1_1_draw_command.html">DrawCommand</a>() {}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;};</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LUMS_INCLUDED_DRAW_COMMAND_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclasslm_1_1_draw_list_html"><div class="ttname"><a href="classlm_1_1_draw_list.html">lm::DrawList</a></div><div class="ttdef"><b>Definition:</b> DrawList.h:12</div></div>
 <div class="ttc" id="aclasslm_1_1_safe_handle_html"><div class="ttname"><a href="classlm_1_1_safe_handle.html">lm::SafeHandle&lt; std::uint16_t, priv::DrawShaderTag &gt;</a></div></div>
-<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_framebuffer_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command_framebuffer.html">lm::priv::DrawCommandFramebuffer</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:56</div></div>
-<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command.html">lm::priv::DrawCommand</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:64</div></div>
-<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_shader_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command_shader.html">lm::priv::DrawCommandShader</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:39</div></div>
-<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_texture_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command_texture.html">lm::priv::DrawCommandTexture</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:46</div></div>
+<div class="ttc" id="aclasslm_1_1_vector_html"><div class="ttname"><a href="classlm_1_1_vector.html">lm::Vector</a></div><div class="ttdef"><b>Definition:</b> Vector.h:91</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_clear_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command_clear.html">lm::priv::DrawCommandClear</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:81</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_draw_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command_draw.html">lm::priv::DrawCommandDraw</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:90</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_framebuffer_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command_framebuffer.html">lm::priv::DrawCommandFramebuffer</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:73</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command.html">lm::priv::DrawCommand</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:95</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_shader_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command_shader.html">lm::priv::DrawCommandShader</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:56</div></div>
+<div class="ttc" id="astructlm_1_1priv_1_1_draw_command_texture_html"><div class="ttname"><a href="structlm_1_1priv_1_1_draw_command_texture.html">lm::priv::DrawCommandTexture</a></div><div class="ttdef"><b>Definition:</b> DrawCommand.h:63</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
