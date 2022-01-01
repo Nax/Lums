@@ -28,7 +28,11 @@ protected:
     LUMS_API_DRAW void swap() override;
 
 private:
-    HGLRC _context;
+    void platformCreateContext();
+    void platformDestroyContext();
+    void platformSwap();
+
+    void* _context;
 
     std::vector<GLuint> _programs;
     std::vector<GLuint> _textures;

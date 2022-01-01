@@ -9,6 +9,8 @@
 # include <GL/gl.h>
 # include <Lums/OpenGL/GL/glext.h>
 # include <Lums/OpenGL/GL/wglext.h>
+#elif defined(LUMS_OS_MACOS)
+# include <OpenGL/gl3.h>
 #endif
 
 namespace lm

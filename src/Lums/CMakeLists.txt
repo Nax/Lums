@@ -13,6 +13,10 @@ function (lums_module dir)
     add_definitions(-D_HAS_EXCEPTIONS=0 -D_CRT_SECURE_NO_WARNINGS=1)
   endif()
 
+  if (APPLE)
+    add_definitions(-DGL_SILENCE_DEPRECATION=1)
+  endif()
+
   set(target "Lums${dir}")
   string(TOUPPER "${dir}" var)
 
@@ -42,7 +46,13 @@ function (lums_module dir)
   endif()
 endfunction()
 
+if (APPLE)
+  set(LUMS_WINDOW_DEPS "-framework Cocoa")
+else()
+  set(LUMS_WINDOW_DEPS "")
+endif()
+
 lums_module(IO)
-lums_module(Window)
+lums_module(Window LINK ${LUMS_WINDOW_DEPS})
 lums_module(OpenGL LINK OpenGL::GL)
 lums_module(Draw LINK LumsWindow LumsOpenGL)

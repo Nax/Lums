@@ -127,7 +127,7 @@ public:
 
         for (size_t i = 0; i < NN; ++i)
             this->_data[i] = T(rhs._data[i]);
-        ::priv::VectorBuilder<T, N, NN>::build(this->_data, head, args...);
+        ::lm::priv::VectorBuilder<T, N, NN>::build(this->_data, head, args...);
     }
 
 

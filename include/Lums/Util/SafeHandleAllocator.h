@@ -21,7 +21,7 @@ public:
 
         if (_freeList.empty())
         {
-            val = T((T::Type)_size++);
+            val = T((typename T::Type)_size++);
         }
         else
         {

@@ -72,7 +72,7 @@ lt::RegisterTest::RegisterTest(const char* name, const char* file, int line, std
     ctx.tests.push_back(t);
 }
 
-bool lt::assert(const char* expr, const char* file, int line, bool value)
+bool lt::assert_helper(const char* expr, const char* file, int line, bool value)
 {
     if (!value)
     {

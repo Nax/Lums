@@ -11,7 +11,7 @@
 #define LT_TEST2(name, count)   static void LT_ID(count)(void); \
                                 lt::RegisterTest LT_ID(__COUNTER__)(name, __FILE__, __LINE__, &LT_ID(count)); \
                                 static void LT_ID(count)(void)
-#define LT_ASSERT(expr)         do { if (lt::assert(#expr, __FILE__, __LINE__, !!(expr))) { return; } } while (0)
+#define LT_ASSERT(expr)         do { if (lt::assert_helper(#expr, __FILE__, __LINE__, !!(expr))) { return; } } while (0)
 #define LT_ASSERT_TRUE(a)       LT_ASSERT(a)
 #define LT_ASSERT_FALSE(a)      LT_ASSERT(!(a))
 #define LT_ASSERT_EQ(a,b)       LT_ASSERT((a) == (b))
@@ -29,7 +29,7 @@ namespace lt
 struct RegisterTestSuite { RegisterTestSuite(const char* name, const char* file, int line); };
 struct RegisterTest { RegisterTest(const char* name, const char* file, int line, std::function<void(void)> func); };
 
-bool assert(const char* expr, const char* file, int line, bool value);
+bool assert_helper(const char* expr, const char* file, int line, bool value);
 
 }
 

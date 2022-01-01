@@ -9,6 +9,10 @@
 # include <windows.h>
 #endif
 
+#if defined(LUMS_OS_MACOS) && defined(__OBJC__)
+# include <Cocoa/Cocoa.h>
+#endif
+
 namespace lm
 {
 
@@ -37,6 +41,13 @@ private:
 #if defined(LUMS_OS_WINDOWS)
     HWND    _win;
     HDC     _dc;
+#endif
+
+#if defined(LUMS_OS_MACOS)
+# if !(defined(__OBJC__))
+    using NSWindow = void;
+# endif
+    NSWindow* _win;
 #endif
 };
 
