@@ -19,7 +19,18 @@ protected:
     LUMS_API_DRAW void swap() override;
 
 private:
-    VkInstance _instance;
+    void initInstance();
+    void initPhysicalDevice();
+    void initDevice();
+
+    void platformInitSurface();
+
+    VkInstance          _instance;
+    VkPhysicalDevice    _physicalDevice;
+    VkDevice            _device;
+    VkQueue             _queueGraphics;
+    VkQueue             _queuePresent;
+    VkSurfaceKHR        _surface;
 };
 
 }
