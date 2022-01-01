@@ -1,4 +1,5 @@
 find_package(OpenGL REQUIRED)
+find_package(Vulkan REQUIRED)
 
 function (lums_module dir)
   cmake_parse_arguments(LUMS_MODULE "" "" "LINK" ${ARGN})
@@ -55,4 +56,4 @@ endif()
 lums_module(IO)
 lums_module(Window LINK ${LUMS_WINDOW_DEPS})
 lums_module(OpenGL LINK OpenGL::GL)
-lums_module(Draw LINK LumsWindow LumsOpenGL)
+lums_module(Draw LINK LumsWindow LumsOpenGL Vulkan::Vulkan)
