@@ -5,6 +5,11 @@
 
 using namespace lm;
 
+void DrawRendererVulkan::platformAppendInstanceExtensions(std::vector<const char*>& exts)
+{
+    exts.push_back(VK_KHR_WIN32_SURFACE_EXTENSION_NAME);
+}
+
 void DrawRendererVulkan::platformInitSurface()
 {
     VkWin32SurfaceCreateInfoKHR info{};

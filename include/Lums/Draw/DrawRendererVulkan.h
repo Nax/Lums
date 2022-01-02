@@ -22,7 +22,9 @@ private:
     void initInstance();
     void initPhysicalDevice();
     void initDevice();
+    void initSwapchain();
 
+    void platformAppendInstanceExtensions(std::vector<const char*>& exts);
     void platformInitSurface();
 
     VkInstance          _instance;
@@ -31,6 +33,7 @@ private:
     VkQueue             _queueGraphics;
     VkQueue             _queuePresent;
     VkSurfaceKHR        _surface;
+    VkSwapchainKHR      _swapchain;
 };
 
 }

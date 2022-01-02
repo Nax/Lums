@@ -1,6 +1,8 @@
 find_package(OpenGL REQUIRED)
 find_package(Vulkan REQUIRED)
 
+add_compile_definitions("$<$<CONFIG:DEBUG>:DEBUG=1>")
+
 function (lums_module dir)
   cmake_parse_arguments(LUMS_MODULE "" "" "LINK" ${ARGN})
   if (NOT MSVC)
