@@ -140,12 +140,14 @@ VkExtent2D getSwapExtent(const VkSurfaceCapabilitiesKHR& caps, Vector2i winSize)
 
 DrawRendererVulkan::DrawRendererVulkan(Window& win)
 : DrawRenderer{win}
-, _instance{VK_NULL_HANDLE}
-, _physicalDevice{VK_NULL_HANDLE}
-, _device{VK_NULL_HANDLE}
-, _queueGraphics{VK_NULL_HANDLE}
-, _surface{VK_NULL_HANDLE}
-, _swapchain{VK_NULL_HANDLE}
+, _instance{}
+, _physicalDevice{}
+, _device{}
+, _queueGraphics{}
+, _surface{}
+, _swapchain{}
+, _swapchainFormat{}
+, _swapchainExtent{}
 {
     /* Dummy */
     for (int i = 0; i < 32; ++i)
@@ -156,6 +158,7 @@ DrawRendererVulkan::DrawRendererVulkan(Window& win)
     initPhysicalDevice();
     initDevice();
     initSwapchain();
+    initSwapchainImageViews();
 }
 
 DrawRendererVulkan::~DrawRendererVulkan()
@@ -314,4 +317,36 @@ void DrawRendererVulkan::initSwapchain()
     createInfo.clipped = VK_TRUE;
 
     vkCreateSwapchainKHR(_device, &createInfo, nullptr, &_swapchain);
+
+    std::uint32_t imgCount{};
+    vkGetSwapchainImagesKHR(_device, _swapchain, &imgCount, nullptr);
+    _swapchainImages.resize(imgCount);
+    vkGetSwapchainImagesKHR(_device, _swapchain, &imgCount, _swapchainImages.data());
+
+    _swapchainFormat = format.format;
+    _swapchainExtent = extent;
+}
+
+void DrawRendererVulkan::initSwapchainImageViews()
+{
+    _swapchainImageViews.resize(_swapchainImages.size());
+    for (std::size_t i = 0; i < _swapchainImages.size(); ++i)
+    {
+        VkImageViewCreateInfo createInfo{};
+        createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+        createInfo.image = _swapchainImages[i];
+        createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+        createInfo.format = _swapchainFormat;
+        createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+        createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+        createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+        createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+        createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        createInfo.subresourceRange.baseMipLevel = 0;
+        createInfo.subresourceRange.levelCount = 1;
+        createInfo.subresourceRange.baseArrayLayer = 0;
+        createInfo.subresourceRange.layerCount = 1;
+
+        vkCreateImageView(_device, &createInfo, nullptr, _swapchainImageViews.data() + i);
+    }
 }

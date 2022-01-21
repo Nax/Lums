@@ -23,17 +23,22 @@ private:
     void initPhysicalDevice();
     void initDevice();
     void initSwapchain();
+    void initSwapchainImageViews();
 
     void platformAppendInstanceExtensions(std::vector<const char*>& exts);
     void platformInitSurface();
 
-    VkInstance          _instance;
-    VkPhysicalDevice    _physicalDevice;
-    VkDevice            _device;
-    VkQueue             _queueGraphics;
-    VkQueue             _queuePresent;
-    VkSurfaceKHR        _surface;
-    VkSwapchainKHR      _swapchain;
+    VkInstance                  _instance;
+    VkPhysicalDevice            _physicalDevice;
+    VkDevice                    _device;
+    VkQueue                     _queueGraphics;
+    VkQueue                     _queuePresent;
+    VkSurfaceKHR                _surface;
+    VkSwapchainKHR              _swapchain;
+    VkFormat                    _swapchainFormat;
+    VkExtent2D                  _swapchainExtent;
+    std::vector<VkImage>        _swapchainImages;
+    std::vector<VkImageView>    _swapchainImageViews;
 };
 
 }
