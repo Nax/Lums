@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classlm_1_1_draw_renderer-members.html">List of all members</a>  </div>
@@ -89,44 +90,50 @@ Inheritance diagram for lm::DrawRenderer:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af591c75c71bf81915a0746027db97695"><td class="memItemLeft" align="right" valign="top"><a id="af591c75c71bf81915a0746027db97695"></a>
-LUMS_API_DRAW&#160;</td><td class="memItemRight" valign="bottom"><b>DrawRenderer</b> (<a class="el" href="classlm_1_1_window.html">Window</a> &amp;window)</td></tr>
+LUMS_API&#160;</td><td class="memItemRight" valign="bottom"><b>DrawRenderer</b> (<a class="el" href="classlm_1_1_window.html">Window</a> &amp;window)</td></tr>
 <tr class="separator:af591c75c71bf81915a0746027db97695"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff3af2fc5e851d9b07edaa58c0177e10"><td class="memItemLeft" align="right" valign="top"><a id="aff3af2fc5e851d9b07edaa58c0177e10"></a>
-virtual LUMS_API_DRAW bool&#160;</td><td class="memItemRight" valign="bottom"><b>valid</b> () const =0</td></tr>
-<tr class="separator:aff3af2fc5e851d9b07edaa58c0177e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1339e27c89187a94f0b9f5dd466604"><td class="memItemLeft" align="right" valign="top"><a id="afb1339e27c89187a94f0b9f5dd466604"></a>
+virtual LUMS_API bool&#160;</td><td class="memItemRight" valign="bottom"><b>valid</b> () const =0</td></tr>
+<tr class="separator:afb1339e27c89187a94f0b9f5dd466604"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9557520023505f7a82a64bdeedffba76"><td class="memItemLeft" align="right" valign="top"><a id="a9557520023505f7a82a64bdeedffba76"></a>
-LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawShader</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createShader</b> (const char *vertexSrc, const char *fragmentSrc)</td></tr>
+LUMS_API <a class="el" href="classlm_1_1_safe_handle.html">DrawShader</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createShader</b> (const char *vertexSrc, const char *fragmentSrc)</td></tr>
 <tr class="separator:a9557520023505f7a82a64bdeedffba76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c598bb395c0bcb22b47b4b354c8a3eb"><td class="memItemLeft" align="right" valign="top"><a id="a3c598bb395c0bcb22b47b4b354c8a3eb"></a>
-LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createTexture</b> (DrawTextureType type, DrawTextureFormat fmt, int width, int height, void *data)</td></tr>
+LUMS_API <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createTexture</b> (DrawTextureType type, DrawTextureFormat fmt, int width, int height, void *data)</td></tr>
 <tr class="separator:a3c598bb395c0bcb22b47b4b354c8a3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c39c6246d62a674a224204075b1e971"><td class="memItemLeft" align="right" valign="top"><a id="a4c39c6246d62a674a224204075b1e971"></a>
-LUMS_API_DRAW <a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createFramebuffer</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> *colors, int colorNum, <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> depth, <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> stencil)</td></tr>
+LUMS_API <a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>createFramebuffer</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> *colors, int colorNum, <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> depth, <a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> stencil)</td></tr>
 <tr class="separator:a4c39c6246d62a674a224204075b1e971"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4532d817d68b6938d5b6a2f554b609c6"><td class="memItemLeft" align="right" valign="top"><a id="a4532d817d68b6938d5b6a2f554b609c6"></a>
-LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyShader</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawShader</a> shader)</td></tr>
+LUMS_API void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyShader</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawShader</a> shader)</td></tr>
 <tr class="separator:a4532d817d68b6938d5b6a2f554b609c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a63220d0d9703250b21810616db6c0f69"><td class="memItemLeft" align="right" valign="top"><a id="a63220d0d9703250b21810616db6c0f69"></a>
-LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyTexture</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> tex)</td></tr>
+LUMS_API void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyTexture</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawTexture</a> tex)</td></tr>
 <tr class="separator:a63220d0d9703250b21810616db6c0f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad22b6bdcf0bcf0a919d07e7b8a4ef574"><td class="memItemLeft" align="right" valign="top"><a id="ad22b6bdcf0bcf0a919d07e7b8a4ef574"></a>
-LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyFramebuffer</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb)</td></tr>
+LUMS_API void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyFramebuffer</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb)</td></tr>
 <tr class="separator:ad22b6bdcf0bcf0a919d07e7b8a4ef574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34ff6ff3fdbf413e51c46a154327bed2"><td class="memItemLeft" align="right" valign="top"><a id="a34ff6ff3fdbf413e51c46a154327bed2"></a>
-LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb, int flags, <a class="el" href="classlm_1_1_vector.html">Vector4f</a> color, float depth, int stencil)</td></tr>
+LUMS_API void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> (<a class="el" href="classlm_1_1_safe_handle.html">DrawFramebuffer</a> fb, int flags, <a class="el" href="classlm_1_1_vector.html">Vector4f</a> color, float depth, int stencil)</td></tr>
 <tr class="separator:a34ff6ff3fdbf413e51c46a154327bed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79d576ee35c902c5737526d59e9fba54"><td class="memItemLeft" align="right" valign="top"><a id="a79d576ee35c902c5737526d59e9fba54"></a>
-LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (const <a class="el" href="classlm_1_1_draw_list.html">DrawList</a> &amp;list)</td></tr>
+LUMS_API void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (const <a class="el" href="classlm_1_1_draw_list.html">DrawList</a> &amp;list)</td></tr>
 <tr class="separator:a79d576ee35c902c5737526d59e9fba54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31a85cd77bf82514c186ff0b2de01db5"><td class="memItemLeft" align="right" valign="top"><a id="a31a85cd77bf82514c186ff0b2de01db5"></a>
-LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> ()</td></tr>
+LUMS_API void&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> ()</td></tr>
 <tr class="separator:a31a85cd77bf82514c186ff0b2de01db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a038e9b64c987e07e509d382f4c2b9555"><td class="memItemLeft" align="right" valign="top"><a id="a038e9b64c987e07e509d382f4c2b9555"></a>
+static LUMS_API <a class="el" href="classlm_1_1_draw_renderer.html">DrawRenderer</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>create</b> (<a class="el" href="classlm_1_1_window.html">Window</a> &amp;win)</td></tr>
+<tr class="separator:a038e9b64c987e07e509d382f4c2b9555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aad1b6117823d751a2407a2d40850b676"><td class="memItemLeft" align="right" valign="top"><a id="aad1b6117823d751a2407a2d40850b676"></a>
-virtual LUMS_API_DRAW void&#160;</td><td class="memItemRight" valign="bottom"><b>swap</b> ()=0</td></tr>
-<tr class="separator:aad1b6117823d751a2407a2d40850b676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d3b1d3f1e3b75ad72d19ca7b5bc8c3c"><td class="memItemLeft" align="right" valign="top"><a id="a1d3b1d3f1e3b75ad72d19ca7b5bc8c3c"></a>
+virtual LUMS_API void&#160;</td><td class="memItemRight" valign="bottom"><b>swap</b> ()=0</td></tr>
+<tr class="separator:a1d3b1d3f1e3b75ad72d19ca7b5bc8c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
