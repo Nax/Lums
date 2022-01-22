@@ -2,6 +2,7 @@
 #include <Lums/Draw/DrawRendererOpenGL.h>
 #include <Lums/Window/Window.h>
 #include <Lums/OpenGL/GL.h>
+#include <Lums/Core/Util.h>
 
 using namespace lm;
 
@@ -84,7 +85,7 @@ GLuint compileShader(const char* src, GLenum type)
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &tmp);
         buffer = (char*)std::calloc(1, tmp + 1);
         glGetShaderInfoLog(shader, tmp + 1, nullptr, buffer);
-        std::printf("%s\n", buffer);
+        Logger::error("%s", buffer);
         std::free(buffer);
     }
 
@@ -101,8 +102,8 @@ DrawRendererOpenGL::DrawRendererOpenGL(Window& win)
     platformCreateContext();
 
     /* Print the context infos */
-    std::printf("OpenGL version: %s\n", glGetString(GL_VERSION));
-    std::printf("OpenGL vendor : %s\n", glGetString(GL_VENDOR));
+    Logger::info("OpenGL version: %s", glGetString(GL_VERSION));
+    Logger::info("OpenGL vendor : %s", glGetString(GL_VENDOR));
 
     /* Load the required GL funcs */
     LOAD_GL(glCreateShader);
