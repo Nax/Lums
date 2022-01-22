@@ -1,5 +1,13 @@
 #include <Lums/Draw/DrawRenderer.h>
 
+#if defined(USE_OPENGL)
+# include <Lums/Draw/DrawRendererOpenGL.h>
+#endif
+
+#if defined(USE_VULKAN)
+# include <Lums/Draw/DrawRendererVulkan.h>
+#endif
+
 using namespace lm;
 
 namespace
@@ -154,4 +162,33 @@ void DrawRenderer::render()
 
     /* Clean up */
     _commands.clear();
+}
+
+DrawRenderer* DrawRenderer::create(Window& win)
+{
+    DrawRenderer* r{};
+
+#if defined(USE_VULKAN)
+    r = new DrawRendererVulkan(win);
+    if (r->valid())
+        return r;
+    else
+    {
+        delete r;
+        r = nullptr;
+    }
+#endif
+
+#if defined(USE_OPENGL)
+    r = new DrawRendererOpenGL(win);
+    if (r->valid())
+        return r;
+    else
+    {
+        delete r;
+        r = nullptr;
+    }
+#endif
+
+    return nullptr;
 }

@@ -2,7 +2,7 @@
 #define LUMS_INCLUDED_OPENGL_GL_H
 
 #include <Lums/Util/Common.h>
-#include <Lums/OpenGL/ABI.h>
+#include <Lums/Util/ABI.h>
 
 #if defined(LUMS_OS_WINDOWS)
 # include <windows.h>
@@ -16,7 +16,7 @@
 namespace lm
 {
 
-LUMS_API_OPENGL void* getOpenGLProcAddr(const char* name);
+LUMS_API void* getOpenGLProcAddr(const char* name);
 
 }
 

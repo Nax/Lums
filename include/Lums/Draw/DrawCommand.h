@@ -3,7 +3,7 @@
 
 #include <Lums/Math/Vector.h>
 #include <Lums/Draw/Types.h>
-#include <Lums/Draw/ABI.h>
+#include <Lums/Util/ABI.h>
 
 namespace lm
 {

@@ -3,13 +3,13 @@
 
 #include <cstdint>
 #include <cstddef>
-#include <Lums/IO/ABI.h>
+#include <Lums/Util/ABI.h>
 #include <Lums/Util/NonCopyable.h>
 
 namespace lm
 {
 
-class LUMS_API_IO Stream : private NonCopyable
+class LUMS_API Stream : private NonCopyable
 {
 public:
     enum Mode : std::uint8_t

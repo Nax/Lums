@@ -6,7 +6,7 @@
 namespace lm
 {
 
-class LUMS_API_IO StreamBuffer : public Stream
+class LUMS_API StreamBuffer : public Stream
 {
 public:
     StreamBuffer(char* buffer, std::size_t len);

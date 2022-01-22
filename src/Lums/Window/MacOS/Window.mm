@@ -4,36 +4,53 @@ using namespace lm;
 
 Window::Window(const char* title, int width, int height)
 {
+    _size.x = width;
+    _size.y = height;
+
     NSRect frame = NSMakeRect(0, 0, width, height);
-    _win = [[NSWindow alloc]
+    NSWindow* win = [[NSWindow alloc]
         initWithContentRect:frame
         styleMask:NSWindowStyleMaskTitled
         backing:NSBackingStoreBuffered
         defer:YES
     ];
-    [_win setTitle:[NSString stringWithUTF8String:title]];
+    [win setOpaque:YES];
+    [win setTitle:[NSString stringWithUTF8String:title]];
+    _handle = (void*)win;
 }
 
 Window::~Window()
 {
-}
-
-Vector2i Window::size() const
-{
-
+    [(NSWindow*)_handle release];
 }
 
 void Window::show()
 {
-    [_win makeKeyAndOrderFront:nil];
+    [(NSWindow*)_handle makeKeyAndOrderFront:nil];
 }
 
 void Window::hide()
 {
-    [_win orderOut:nil];
+    [(NSWindow*)_handle orderOut:nil];
 }
 
 bool Window::poll()
 {
+    NSApplication* app = [NSApplication sharedApplication];
+    NSEvent* event;
 
+    for (;;)
+    {
+        event = [app
+            nextEventMatchingMask:NSEventMaskAny
+            untilDate:nil
+            inMode:NSDefaultRunLoopMode
+            dequeue:YES
+        ];
+        if (event == nil)
+            break;
+        [NSApp sendEvent:event];
+    }
+
+    return false;
 }
